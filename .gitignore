@@ -1,0 +1,17 @@
+.idea
+coverage
+npm-debug.log
+build
+node_modules
+
+nblas-plus
+shm-typed-array
+vectorious-plus
+quick-tcp-socket
+
+data/ml-*
+data/factors*
+data/db-scheme-old*
+
+heroku-update-mal-api-servers.sh
+
