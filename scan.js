@@ -20,15 +20,11 @@ const config = require('./config/config-scanner');
 
 var tq = new MalTaskQueue();
 tq.init(config).then(() => {
-  tq.runTaskQueue();
+  tq.runTaskQueueLoop();
 
   //todo - add to queue by timer or manually from redis
   //tq.addTasksToQueue(MalScanner.grabNewsTasksKeys);
   //tq.addTasksToQueue(MalScanner.grabUpdatesTasksKeys);
-
-  //tq.addTasksToQueue(['test1']);
-  //tq.addTasksToQueue(['NewUserLists']);
-
 
   /*
   //to test proxy
@@ -45,12 +41,7 @@ tq.init(config).then(() => {
 });
 
 
-
-//todo: check user skipped ids - вдруг пропустил?
-//todo: проверить, что rss даты посл.обновления листа работает
-
 nodeCleanup(() => {
-
 });
 
 process.on('unhandledRejection', function (err) {

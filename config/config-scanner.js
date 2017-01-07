@@ -115,7 +115,7 @@ var config = {
 
 //----------------------------------------
 
-if (1) {
+if (0) {
   for (let i = 101 ; i <= 120 ; i++) {
     let k = 'hk'+i;
     config.providers[k] = {
@@ -168,6 +168,16 @@ if (0) {
     config.providers[k] = conf;
   }
 }
+
+//todo test
+  for (let i = 0 ; i <= 10 ; i++) {
+    let k = 'test'+i;
+    config.providers[k] = {
+      type: "parser",
+      addr: null,
+    };
+  }
+
 
 module.exports = config;
 
