@@ -22,7 +22,7 @@ var tq = new MalTaskQueue();
 tq.init(config).then(() => {
   tq.runTaskQueueLoop();
 
-  //todo - add to queue by timer or manually from redis
+  //todo - add tasks to queue by timer or manually from redis
   //tq.addTasksToQueue(MalScanner.grabNewsTasksKeys);
   //tq.addTasksToQueue(MalScanner.grabUpdatesTasksKeys);
 
@@ -38,6 +38,7 @@ tq.init(config).then(() => {
     });
   }
   */
+
 });
 
 

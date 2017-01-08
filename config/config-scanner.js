@@ -88,8 +88,8 @@ var config = {
   },
   scanner: {
     approxBiggestUserId: (isTest ? 130 : 5910700), //manually biggest found user id
-    maxNotFoundUserIdsToStop: (isTest ? 1 : 300),
-    //maxNotFoundAnimeIdsToStop: (isTest ? 1 : 100),
+    maxNotFoundUserIdsToStop: (isTest ? 20 : 300),
+    //maxNotFoundAnimeIdsToStop: (isTest ? 20 : 100),
     log: (isTest ? true : false),
     cntErrorsToStopGrab: (isTest ? 5 : 20),
     saveProcessingIdsAfterEvery: (isTest ? 10 : 50),
@@ -115,7 +115,7 @@ var config = {
 
 //----------------------------------------
 
-if (0) {
+if (!isTest) {
   for (let i = 101 ; i <= 120 ; i++) {
     let k = 'hk'+i;
     config.providers[k] = {
@@ -134,7 +134,7 @@ var queueSizesForProxySpeeds = {
   1: [2, 10],
 };
 
-if (0) {
+if (!isTest) {
   for (let webProxyType in webProxies) {
     for (let addr in webProxies[webProxyType]) {
       let opts = webProxies[webProxyType][addr];
@@ -153,7 +153,7 @@ if (0) {
   }
 }
 
-if (0) {
+if (!isTest) {
   for (let addr in proxises) {
     let opts = proxises[addr];
     if (opts.speed == 0)
@@ -169,7 +169,7 @@ if (0) {
   }
 }
 
-//todo test
+if (isTest) {
   for (let i = 0 ; i <= 10 ; i++) {
     let k = 'test'+i;
     config.providers[k] = {
@@ -177,6 +177,7 @@ if (0) {
       addr: null,
     };
   }
+}
 
 
 module.exports = config;
