@@ -13,5 +13,3 @@ data/ml-*
 data/factors*
 data/db-scheme-old*
 
-heroku-update-mal-api-servers.sh
-
