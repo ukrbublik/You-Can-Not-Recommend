@@ -205,11 +205,11 @@ BEGIN
 		_rating;
 
 	update malrec_users
-	 set is_modified = true
-	 where list_id = _user_list_id and is_modified = false;
+	 set are_ratings_modified = true
+	 where list_id = _user_list_id and are_ratings_modified = false;
 	update malrec_items
-	 set is_modified = true
-	 where id = _item_id and is_modified = false;
+	 set are_ratings_modified = true
+	 where id = _item_id and are_ratings_modified = false;
 
 	RETURN 0;
 END;
@@ -291,17 +291,17 @@ CREATE FUNCTION malrec_fix_for_train(_use_all_for_train boolean) RETURNS integer
 	-- mark modified U/I as used for train
 	if _use_all_for_train = true then
 		update malrec_items
-		 set is_used_for_train = true, is_modified = false;
+		 set is_used_for_train = true, are_ratings_modified = false;
 		update malrec_users
-		 set is_used_for_train = true, is_modified = false;
+		 set is_used_for_train = true, are_ratings_modified = false;
 	else 
 		update malrec_items
-		 set is_used_for_train = true, is_modified = false
-		 where is_modified = true;
+		 set is_used_for_train = true, are_ratings_modified = false
+		 where are_ratings_modified = true;
 		
 		update malrec_users
-		 set is_used_for_train = true, is_modified = false
-		 where is_modified = true;
+		 set is_used_for_train = true, are_ratings_modified = false
+		 where are_ratings_modified = true;
 	end if;
 
 	-- apply changes to ratings
@@ -832,7 +832,7 @@ CREATE TABLE malrec_items (
     franchise_id integer,
     type malrec_item_type,
     recs_update_ts timestamp without time zone,
-    is_modified boolean DEFAULT true NOT NULL,
+    are_ratings_modified boolean DEFAULT true NOT NULL,
     is_used_for_train boolean DEFAULT false NOT NULL,
     recs_check_ts timestamp without time zone
 );
@@ -913,7 +913,7 @@ CREATE TABLE malrec_users (
     most_rated_items_update_ts timestamp without time zone,
     reg_date date,
     gender malrec_gender,
-    is_modified boolean DEFAULT true NOT NULL,
+    are_ratings_modified boolean DEFAULT true NOT NULL,
     is_used_for_train boolean DEFAULT false NOT NULL,
     list_check_ts timestamp without time zone,
     need_to_check_list boolean DEFAULT false NOT NULL
@@ -1009,10 +1009,10 @@ ALTER TABLE ONLY malrec_users
 
 
 --
--- Name: malrec_items_is_modified_idx; Type: INDEX; Schema: public; Owner: postgres
+-- Name: malrec_items_are_ratings_modified_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX malrec_items_is_modified_idx ON malrec_items USING btree (is_modified);
+CREATE INDEX malrec_items_are_ratings_modified_idx ON malrec_items USING btree (are_ratings_modified);
 
 
 --
@@ -1051,10 +1051,10 @@ CREATE INDEX malrec_ratings_user_list_id_dataset_type_indx ON malrec_ratings USI
 
 
 --
--- Name: malrec_users_is_modified_idx; Type: INDEX; Schema: public; Owner: postgres
+-- Name: malrec_users_are_ratings_modified_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX malrec_users_is_modified_idx ON malrec_users USING btree (is_modified);
+CREATE INDEX malrec_users_are_ratings_modified_idx ON malrec_users USING btree (are_ratings_modified);
 
 
 --
