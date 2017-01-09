@@ -62,7 +62,8 @@ ALTER TYPE malrec_dataset_type OWNER TO postgres;
 
 CREATE TYPE malrec_gender AS ENUM (
     'Male',
-    'Female'
+    'Female',
+    'Non-Binary'
 );
 
 
@@ -834,7 +835,8 @@ CREATE TABLE malrec_items (
     recs_update_ts timestamp without time zone,
     are_ratings_modified boolean DEFAULT true NOT NULL,
     is_used_for_train boolean DEFAULT false NOT NULL,
-    recs_check_ts timestamp without time zone
+    recs_check_ts timestamp without time zone,
+    is_deleted boolean DEFAULT false NOT NULL
 );
 
 
@@ -916,7 +918,8 @@ CREATE TABLE malrec_users (
     are_ratings_modified boolean DEFAULT true NOT NULL,
     is_used_for_train boolean DEFAULT false NOT NULL,
     list_check_ts timestamp without time zone,
-    need_to_check_list boolean DEFAULT false NOT NULL
+    need_to_check_list boolean DEFAULT false NOT NULL,
+    is_deleted boolean DEFAULT false NOT NULL
 );
 
 
@@ -1253,6 +1256,7 @@ REVOKE ALL ON TABLE malrec_genres FROM postgres;
 GRANT ALL ON TABLE malrec_genres TO postgres;
 GRANT ALL ON TABLE malrec_genres TO root;
 GRANT ALL ON TABLE malrec_genres TO ukrbublik;
+GRANT ALL ON TABLE malrec_genres TO PUBLIC;
 
 
 --
@@ -1264,6 +1268,7 @@ REVOKE ALL ON TABLE malrec_items FROM postgres;
 GRANT ALL ON TABLE malrec_items TO postgres;
 GRANT ALL ON TABLE malrec_items TO root;
 GRANT ALL ON TABLE malrec_items TO ukrbublik;
+GRANT ALL ON TABLE malrec_items TO PUBLIC;
 
 
 --
@@ -1286,6 +1291,7 @@ REVOKE ALL ON TABLE malrec_items_recs FROM postgres;
 GRANT ALL ON TABLE malrec_items_recs TO postgres;
 GRANT ALL ON TABLE malrec_items_recs TO root;
 GRANT ALL ON TABLE malrec_items_recs TO ukrbublik;
+GRANT ALL ON TABLE malrec_items_recs TO PUBLIC;
 
 
 --
@@ -1297,6 +1303,7 @@ REVOKE ALL ON TABLE malrec_items_rels FROM postgres;
 GRANT ALL ON TABLE malrec_items_rels TO postgres;
 GRANT ALL ON TABLE malrec_items_rels TO root;
 GRANT ALL ON TABLE malrec_items_rels TO ukrbublik;
+GRANT ALL ON TABLE malrec_items_rels TO PUBLIC;
 
 
 --
@@ -1308,6 +1315,7 @@ REVOKE ALL ON TABLE malrec_ratings FROM postgres;
 GRANT ALL ON TABLE malrec_ratings TO postgres;
 GRANT ALL ON TABLE malrec_ratings TO root;
 GRANT ALL ON TABLE malrec_ratings TO ukrbublik;
+GRANT ALL ON TABLE malrec_ratings TO PUBLIC;
 
 
 --
@@ -1319,6 +1327,7 @@ REVOKE ALL ON TABLE malrec_users FROM postgres;
 GRANT ALL ON TABLE malrec_users TO postgres;
 GRANT ALL ON TABLE malrec_users TO root;
 GRANT ALL ON TABLE malrec_users TO ukrbublik;
+GRANT ALL ON TABLE malrec_users TO PUBLIC;
 
 
 --
