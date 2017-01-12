@@ -1,6 +1,6 @@
 {
   "name": "YouCanNotRecommend",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Recommender system for MyAnimeList",
   "main": "index.js",
   "dependencies": {
@@ -17,6 +17,7 @@
     "progress": "^1.1.8",
     "promise": "^7.1.1",
     "promise-queue": "^2.2.3",
+    "quick-tcp-socket": "^1.0.0",
     "redis": "^2.6.3",
     "request": "^2.79.0",
     "shm-typed-array": "^0.0.8",

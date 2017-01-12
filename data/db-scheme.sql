@@ -1101,7 +1101,6 @@ REVOKE ALL ON FUNCTION decr_ratings_count() FROM PUBLIC;
 REVOKE ALL ON FUNCTION decr_ratings_count() FROM postgres;
 GRANT ALL ON FUNCTION decr_ratings_count() TO postgres;
 GRANT ALL ON FUNCTION decr_ratings_count() TO PUBLIC;
-GRANT ALL ON FUNCTION decr_ratings_count() TO ukrbublik;
 
 
 --
@@ -1112,7 +1111,6 @@ REVOKE ALL ON FUNCTION incr_ratings_count() FROM PUBLIC;
 REVOKE ALL ON FUNCTION incr_ratings_count() FROM postgres;
 GRANT ALL ON FUNCTION incr_ratings_count() TO postgres;
 GRANT ALL ON FUNCTION incr_ratings_count() TO PUBLIC;
-GRANT ALL ON FUNCTION incr_ratings_count() TO ukrbublik;
 
 
 --
@@ -1123,7 +1121,6 @@ REVOKE ALL ON FUNCTION malrec_add_rating_for_user_id(_user_id integer, _item_id 
 REVOKE ALL ON FUNCTION malrec_add_rating_for_user_id(_user_id integer, _item_id integer, _rating integer) FROM postgres;
 GRANT ALL ON FUNCTION malrec_add_rating_for_user_id(_user_id integer, _item_id integer, _rating integer) TO postgres;
 GRANT ALL ON FUNCTION malrec_add_rating_for_user_id(_user_id integer, _item_id integer, _rating integer) TO PUBLIC;
-GRANT ALL ON FUNCTION malrec_add_rating_for_user_id(_user_id integer, _item_id integer, _rating integer) TO ukrbublik;
 
 
 --
@@ -1134,7 +1131,6 @@ REVOKE ALL ON FUNCTION malrec_add_ratings_rand() FROM PUBLIC;
 REVOKE ALL ON FUNCTION malrec_add_ratings_rand() FROM postgres;
 GRANT ALL ON FUNCTION malrec_add_ratings_rand() TO postgres;
 GRANT ALL ON FUNCTION malrec_add_ratings_rand() TO PUBLIC;
-GRANT ALL ON FUNCTION malrec_add_ratings_rand() TO ukrbublik;
 
 
 --
@@ -1145,7 +1141,6 @@ REVOKE ALL ON FUNCTION malrec_delete_all_data() FROM PUBLIC;
 REVOKE ALL ON FUNCTION malrec_delete_all_data() FROM postgres;
 GRANT ALL ON FUNCTION malrec_delete_all_data() TO postgres;
 GRANT ALL ON FUNCTION malrec_delete_all_data() TO PUBLIC;
-GRANT ALL ON FUNCTION malrec_delete_all_data() TO ukrbublik;
 
 
 --
@@ -1156,7 +1151,6 @@ REVOKE ALL ON FUNCTION malrec_drop_ratings_rand() FROM PUBLIC;
 REVOKE ALL ON FUNCTION malrec_drop_ratings_rand() FROM postgres;
 GRANT ALL ON FUNCTION malrec_drop_ratings_rand() TO postgres;
 GRANT ALL ON FUNCTION malrec_drop_ratings_rand() TO PUBLIC;
-GRANT ALL ON FUNCTION malrec_drop_ratings_rand() TO ukrbublik;
 
 
 --
@@ -1167,7 +1161,6 @@ REVOKE ALL ON FUNCTION malrec_fix_for_train(_use_all_for_train boolean) FROM PUB
 REVOKE ALL ON FUNCTION malrec_fix_for_train(_use_all_for_train boolean) FROM postgres;
 GRANT ALL ON FUNCTION malrec_fix_for_train(_use_all_for_train boolean) TO postgres;
 GRANT ALL ON FUNCTION malrec_fix_for_train(_use_all_for_train boolean) TO PUBLIC;
-GRANT ALL ON FUNCTION malrec_fix_for_train(_use_all_for_train boolean) TO ukrbublik;
 
 
 --
@@ -1178,7 +1171,6 @@ REVOKE ALL ON FUNCTION malrec_import_ml_100k(_path text) FROM PUBLIC;
 REVOKE ALL ON FUNCTION malrec_import_ml_100k(_path text) FROM postgres;
 GRANT ALL ON FUNCTION malrec_import_ml_100k(_path text) TO postgres;
 GRANT ALL ON FUNCTION malrec_import_ml_100k(_path text) TO PUBLIC;
-GRANT ALL ON FUNCTION malrec_import_ml_100k(_path text) TO ukrbublik;
 
 
 --

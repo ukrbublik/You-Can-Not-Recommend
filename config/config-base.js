@@ -9,7 +9,7 @@ var config = {
   "redis": {
   },
   "common": {
-    "dbType": 'ml', //'ml', 'mal'
+    "dbType": 'ml', //'ml' (MovieLens), 'mal' (MyAnimeList)
     "maxRating": {
       "mal": 10,
       "ml": 5,
