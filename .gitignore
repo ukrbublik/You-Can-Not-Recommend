@@ -11,5 +11,6 @@ quick-tcp-socket
 
 data/ml-*
 data/factors*
-data/db-scheme-old*
+data/db-schema-old*
+upd_schema.sh
 

@@ -37,7 +37,8 @@ if (taskType == 'import_ml') {
 } else if(taskType == 'delete_all_data') {
   do_delete_all_data();
 } else if(taskType == 'start') {
-  start_server(!configPrefix.indexOf('slave'));
+  let isMaster = (configPrefix.indexOf('slave') == -1);
+  start_server(isMaster);
 } else {
   show_cmd_help();
 }
@@ -77,7 +78,6 @@ function start_server(isMaster) {
     enable_api_emf();
     if (isMaster)
       enable_api_emf_lord();
-
     server.listen(config.api.apiServerPort, () => {
       console.log('API listening on port ' + config.api.apiServerPort);
     });
