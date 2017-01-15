@@ -44,9 +44,9 @@ if (taskType == 'import_ml') {
 }
 
 function show_cmd_help() {
-  console.log("Usage: configPrefix=.. [dbType=..] " 
+  console.log("Usage: [configPrefix=..] [dbType=..] " 
     + "node index.js import_ml|delete_all_data|start [other params]");
-  console.log("configPrefix: master, slave, slave2");
+  console.log("configPrefix: master (default), slave, slave2");
   console.log("dbType: ml for MovieLens, mal for MyAnimeList");
   console.log("import_ml: import from MovieLens data. Param 1: 100k|1m");
   console.log("delete_all_data: clear db, delete calc results. " 
