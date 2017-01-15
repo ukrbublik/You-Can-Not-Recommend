@@ -298,12 +298,18 @@ CREATE FUNCTION malrec_fix_for_train(_use_all_for_train boolean) RETURNS integer
 	end if;
 	
 	-- apply changes to ratings
-	update malrec_ratings
-	 set rating = new_rating, new_rating = null
-	 where new_rating is not null;
+	delete from malrec_ratings as r
+	using malrec_ratings_changes as rc
+	where rc.user_list_id = r.user_list_id and rc.item_id = r.item_id
+	 and rc.rating = 0;
 
-	delete from malrec_ratings
-	 where rating = 0;
+	update malrec_ratings as r
+	set rating = rc.rating
+	from malrec_ratings_changes as rc
+	where rc.user_list_id = r.user_list_id and rc.item_id = r.item_id
+	 and rc.rating <> 0;
+
+	delete from malrec_ratings_changes;
 
 	update malrec_ratings
 	 set dataset_type = 0
@@ -680,9 +686,18 @@ CREATE FUNCTION malrec_unfix_for_train(_use_all_for_train boolean) RETURNS void
     AS $$
 BEGIN
 	-- apply changes to ratings that were made during train
-	update malrec_ratings
-	set rating = new_rating, new_rating = null
-	where new_rating is not null;
+	delete from malrec_ratings as r
+	using malrec_ratings_changes as rc
+	where rc.user_list_id = r.user_list_id and rc.item_id = r.item_id
+	 and rc.rating = 0;
+
+	update malrec_ratings as r
+	set rating = rc.rating
+	from malrec_ratings_changes as rc
+	where rc.user_list_id = r.user_list_id and rc.item_id = r.item_id
+	 and rc.rating <> 0;
+
+	delete from malrec_ratings_changes;
 
 	update malrec_ratings
 	 set dataset_type = 0
@@ -857,9 +872,32 @@ CREATE TABLE malrec_ratings (
     user_list_id integer NOT NULL,
     item_id integer NOT NULL,
     rating smallint NOT NULL,
-    dataset_type smallint DEFAULT 0 NOT NULL,
-    new_rating smallint
+    dataset_type smallint DEFAULT 0 NOT NULL
+)
+WITH (fillfactor='70');
+
+
+--
+-- Name: malrec_ratings_changes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE malrec_ratings_changes (
+    user_list_id integer NOT NULL,
+    item_id integer NOT NULL,
+    rating smallint NOT NULL
 );
+
+
+--
+-- Name: malrec_ratings_changes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE malrec_ratings_changes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -942,6 +980,14 @@ ALTER TABLE ONLY malrec_items_rels
 
 
 --
+-- Name: malrec_ratings_changes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY malrec_ratings_changes
+    ADD CONSTRAINT malrec_ratings_changes_pkey PRIMARY KEY (user_list_id, item_id);
+
+
+--
 -- Name: malrec_ratings_item_id_user_list_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -950,11 +996,11 @@ ALTER TABLE ONLY malrec_ratings
 
 
 --
--- Name: malrec_ratings_user_list_id_item_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: malrec_ratings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY malrec_ratings
-    ADD CONSTRAINT malrec_ratings_user_list_id_item_id_key PRIMARY KEY (user_list_id, item_id);
+    ADD CONSTRAINT malrec_ratings_pkey PRIMARY KEY (user_list_id, item_id);
 
 
 --
