@@ -1,10 +1,19 @@
 var config = {
 	"db": {
-    "host": "localhost",
-    "port": 5432,
-    "database": "malrec",
-    "user": "root",
-    "password": "toor"
+    "mal": {
+      "host": "localhost",
+      "port": 5432,
+      "database": "malrec",
+      "user": "root",
+      "password": "toor"
+    },
+    "ml": {
+      "host": "localhost",
+      "port": 5432,
+      "database": "mlrec",
+      "user": "root",
+      "password": "toor"
+    }
 	},
   "redis": {
   },
@@ -20,6 +29,8 @@ var config = {
     },
   },
 	"emf": {
+    "factorsCount": 100,
+    "trainIters": 10,
     "clusterMasterHost": "localhost",
     "clusterMasterPort": 7101,
     "clusterServerPort": 7101

@@ -1,0 +1,22 @@
+{
+  "alg": "als",
+  "algOptions": {
+    "userFactReg": 0.05,
+    "itemFactReg": 0.05,
+    "initFirstFactorAsAvgRating": false
+  },
+  "useDoublePrecision": false,
+  "factorsCount": 100,
+  "dataSetDistr": [
+    85,
+    10,
+    5
+  ],
+  "totalUsersCount": 6040,
+  "totalItemsCount": 3952,
+  "dbType": "ml",
+  "calcDate": "2017-01-16T14:02:34.174Z",
+  "calcCnt": 2,
+  "globalAvgShift": 0.21464607208361874,
+  "globalBias": 0
+}

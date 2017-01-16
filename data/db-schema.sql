@@ -216,7 +216,7 @@ CREATE FUNCTION malrec_add_ratings_rand() RETURNS void
     if column_rand = 'rand' then
     else
       alter table malrec_ratings add column rand integer;
-      CREATE INDEX malrec_ratings_rand_id_indx ON malrec_ratings USING btree (rand, id);
+      CREATE INDEX malrec_ratings_rand_indx ON malrec_ratings USING btree (rand);
     end if;
   END;
   $$;
@@ -231,12 +231,14 @@ CREATE FUNCTION malrec_delete_all_data() RETURNS void
     AS $$
 BEGIN
 
+delete from malrec_ratings_changes;
 delete from malrec_ratings;
 delete from malrec_users;
 delete from malrec_items_rels;
 delete from malrec_items_recs;
 delete from malrec_items;
 delete from malrec_genres;
+delete from malrec_stats;
 
 ALTER SEQUENCE malrec_users_list_id_seq RESTART WITH 1;
 ALTER SEQUENCE malrec_items_franchise_id_seq RESTART WITH 1;
@@ -264,7 +266,21 @@ CREATE FUNCTION malrec_drop_ratings_rand() RETURNS void
 
 CREATE FUNCTION malrec_fix_for_train(_use_all_for_train boolean) RETURNS integer
     LANGUAGE plpgsql
-    AS $$BEGIN
+    AS $$DECLARE items_mod_cnt integer;
+DECLARE users_mod_cnt integer;
+
+BEGIN
+
+	select count(id)
+	from malrec_items
+	where are_ratings_modified = true
+	into items_mod_cnt;
+
+	select count(list_id)
+	from malrec_users
+	where are_ratings_modified = true
+	into users_mod_cnt;
+
 	if _use_all_for_train = true then
 		-- mark all U/I as unmodified and used for train
 		update malrec_items
@@ -272,7 +288,7 @@ CREATE FUNCTION malrec_fix_for_train(_use_all_for_train boolean) RETURNS integer
 		 where is_used_for_train = false;
 		update malrec_users
 		 set is_used_for_train = true
-		 where is_used_for_train = false;
+		 where list_id is not null and is_used_for_train = false;
 
 		update malrec_items
 		 set are_ratings_modified = false
@@ -315,7 +331,7 @@ CREATE FUNCTION malrec_fix_for_train(_use_all_for_train boolean) RETURNS integer
 	 set dataset_type = 0
 	 where dataset_type = 4;
 
-	RETURN 0;
+	RETURN (CASE WHEN (items_mod_cnt > 0 OR users_mod_cnt > 0) THEN 1 ELSE 0 END);
 END;
 $$;
 
@@ -874,7 +890,7 @@ CREATE TABLE malrec_ratings (
     rating smallint NOT NULL,
     dataset_type smallint DEFAULT 0 NOT NULL
 )
-WITH (fillfactor='70');
+WITH (fillfactor='80');
 
 
 --
@@ -898,6 +914,16 @@ CREATE SEQUENCE malrec_ratings_changes_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
+
+
+--
+-- Name: malrec_stats; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE malrec_stats (
+    key character varying(50) NOT NULL,
+    val character varying(20)
+);
 
 
 --
@@ -988,19 +1014,19 @@ ALTER TABLE ONLY malrec_ratings_changes
 
 
 --
--- Name: malrec_ratings_item_id_user_list_id_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY malrec_ratings
-    ADD CONSTRAINT malrec_ratings_item_id_user_list_id_key UNIQUE (item_id, user_list_id);
-
-
---
 -- Name: malrec_ratings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY malrec_ratings
     ADD CONSTRAINT malrec_ratings_pkey PRIMARY KEY (user_list_id, item_id);
+
+
+--
+-- Name: malrec_stats_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY malrec_stats
+    ADD CONSTRAINT malrec_stats_pkey PRIMARY KEY (key);
 
 
 --
@@ -1050,17 +1076,24 @@ CREATE INDEX malrec_items_is_used_for_train_idx ON malrec_items USING btree (is_
 
 
 --
--- Name: malrec_ratings_dataset_type_item_id_idx; Type: INDEX; Schema: public; Owner: -
+-- Name: malrec_ratings_dataset_type_idx; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX malrec_ratings_dataset_type_item_id_idx ON malrec_ratings USING btree (dataset_type, item_id);
+CREATE INDEX malrec_ratings_dataset_type_idx ON malrec_ratings USING btree (dataset_type);
 
 
 --
--- Name: malrec_ratings_dataset_type_user_list_id_idx; Type: INDEX; Schema: public; Owner: -
+-- Name: malrec_ratings_item_id_dataset_type_idx; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX malrec_ratings_dataset_type_user_list_id_idx ON malrec_ratings USING btree (dataset_type, user_list_id);
+CREATE INDEX malrec_ratings_item_id_dataset_type_idx ON malrec_ratings USING btree (item_id, dataset_type);
+
+
+--
+-- Name: malrec_ratings_user_list_id_dataset_type_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX malrec_ratings_user_list_id_dataset_type_idx ON malrec_ratings USING btree (user_list_id, dataset_type);
 
 
 --
