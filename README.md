@@ -62,8 +62,6 @@ node index.js start
 
 # Options
 See `EmfBase.DefaultOptions`
-...
-
 
 
 # Performance
@@ -74,15 +72,15 @@ See `EmfBase.DefaultOptions`
 ### MovieLens 1m @ PC#1
 - 6840 users, 3883 items, 1M ratings
 - 100 factors, 10 iters, 85/10/5% split
-Prepare: 106s
-Times per iteration: 3.2s for users, 3.2s for items
-RMSE: 0.84, normalized = ?
+- Prepare: 106s
+- Times per iteration: 3.2s for users, 3.2s for items
+- RMSE: 0.84
 
 ### MAL @ PC#1
-1.75M users with lists (2.13M without), 12.7K items, 121M ratings
-100 factors, 85/10/5% split
-Times per iteration: 630s for users, 720s for items, ? for rmse validate, ? for rmse test
-RMSE: ?, normalized = ?
+- 1.75M users with lists (2.13M without), 12.7K items, 121M ratings
+- 100 factors, 85/10/5% split
+- Times per iteration: 630s for users, 720s for items, ? for rmse validate, ? for rmse test
+- RMSE: ?
 
 ### MAL @ PC#1+Laptop#1
 ...
@@ -90,10 +88,13 @@ RMSE: ?, normalized = ?
 
 # Thoughts
 You can:
+
 - use matrix factorization as base algo
 - use item-to-item recommendations for items rated by user (todo)
 - use kNN as secondary algo (use users - nearest neighbours) (todo)
 - use social info (friends, clubs) (todo)
+
 You can not:
+
 - include in recommendations items that user already plans to watch or watched but not rated
 - repeat items of same mediafranchise (todo)
