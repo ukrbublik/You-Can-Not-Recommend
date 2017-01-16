@@ -28,7 +28,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js master",
+    "start": "node index.js start",
     "install": "node-gyp configure && node-gyp rebuild"
   },
   "author": "ukrbublik",
