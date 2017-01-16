@@ -57,7 +57,7 @@ node index.js start
 
 
 # Using clustering
-...
+todo...
 
 
 # Options
@@ -65,36 +65,42 @@ See `EmfBase.DefaultOptions`
 
 
 # Performance
-- OS: Ubuntu 16.04 LTS, nodejs v6.9.2
+Soft: 
+
+- Ubuntu 16.04 LTS
+- nodejs v6.9.2
+
+Hard:
+
 - PC#1: Core i5-6500, 16GB DRR4-2133, SSD Samsung 850
 - Laptop#1: Lenovo Z570 - Core i5-2450M, 8GB DDR2, HDD 5400rpm (connected as slave with Fast Ethernet)
 
 ### MovieLens 1m @ PC#1
 - 6840 users, 3883 items, 1M ratings
 - 100 factors, 10 iters, 85/10/5% split
-- Prepare: 106s
 - Times per iteration: 3.2s for users, 3.2s for items
-- RMSE: 0.84
+- RMSE: ~0.84 (and less after each iteration)
 
 ### MAL @ PC#1
 - 1.75M users with lists (2.13M without), 12.7K items, 121M ratings
 - 100 factors, 85/10/5% split
-- Times per iteration: 630s for users, 720s for items, ? for rmse validate, ? for rmse test
+- Prepare: first time (splitting all ratings to sets) too long - 1h:5m
+- Times per iteration: 630s for users, 720s for items, ? for rmse
 - RMSE: ?
 
-### MAL @ PC#1+Laptop#1
-...
+### MAL @ PC#1 + Laptop#1 (cluster)
+todo...
 
 
 # Thoughts
-You can:
+You should:
 
 - use matrix factorization as base algo
 - use item-to-item recommendations for items rated by user (todo)
 - use kNN as secondary algo (use users - nearest neighbours) (todo)
 - use social info (friends, clubs) (todo)
 
-You can not:
+You should not:
 
 - include in recommendations items that user already plans to watch or watched but not rated
 - repeat items of same mediafranchise (todo)
