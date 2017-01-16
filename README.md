@@ -22,6 +22,7 @@ Can be split to several PCs using simple implemented clustering with [IPC socket
 During training user/item factors matricies data are stored in [shared memory](https://www.npmjs.com/package/shm-typed-array) to be accessible by worker processes.
 
 There is also option to store them in files (if RAM is low or data is too big to fit in RAM). 
+
 Persistent storage of user/item factors - files.
 
 
@@ -87,6 +88,7 @@ Hard:
 - Prepare: first time (splitting all ratings to sets) too long - 1h:5m (todo: how to optimize?)
 - Times per iteration: 2x 670s for U/I factors, 3x 25s for RMSE
 - RMSE: 1.346 (normalized 0.135) (after 2 iters)
+
 todo... do more iters
 
 ### MAL @ PC#1 + Laptop#1 (cluster)
