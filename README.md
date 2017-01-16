@@ -1,6 +1,6 @@
 # You Can (Not) Recomend 1.11 #
 
-![logo.png](https://bitbucket.org/repo/X8Ao4b/images/2734498452-logo.png)
+![logo.png](logo.png)
 
 # About
 Recommender system engine on NodeJS.
