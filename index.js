@@ -150,7 +150,6 @@ function enable_api_emf_lord() {
 }
 
 nodeCleanup(() => {
-
 });
 
 process.on('unhandledRejection', function (err) {
