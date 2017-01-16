@@ -78,15 +78,16 @@ Hard:
 ### MovieLens 1m @ PC#1
 - 6840 users, 3883 items, 1M ratings
 - 100 factors, 85/10/5% split
-- Times per iteration: 3.2s for users, 3.2s for items
-- RMSE: ~0.842 (after 10 iters)
+- Times per iteration: 2x 3.2s for U/I factors
+- RMSE: ~0.842 (normalized 0.168) (after 10 iters)
 
 ### MAL @ PC#1
 - 1.75M users with lists (2.13M without), 12.7K items, 121M ratings
 - 100 factors, 85/10/5% split
 - Prepare: first time (splitting all ratings to sets) too long - 1h:5m (todo: how to optimize?)
-- Times per iteration: 630s for users, 720s for items, ? for rmse
-- RMSE: ? (after ? iters)
+- Times per iteration: 2x 670s for U/I factors, 3x 25s for RMSE
+- RMSE: 1.346 (normalized 0.135) (after 2 iters)
+todo... do more iters
 
 ### MAL @ PC#1 + Laptop#1 (cluster)
 todo...
