@@ -93,14 +93,14 @@ todo...
 
 
 # Thoughts
-You should:
+You can:
 
 - use matrix factorization as base algo
 - use item-to-item recommendations for items rated by user (todo)
 - use kNN as secondary algo (use users - nearest neighbours) (todo)
 - use social info (friends, clubs) (todo)
 
-You should not:
+You can not:
 
 - include in recommendations items that user already plans to watch or watched but not rated
 - repeat items of same mediafranchise (todo)
