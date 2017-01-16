@@ -2,7 +2,7 @@
 
 ![logo.png](https://bitbucket.org/repo/X8Ao4b/images/2734498452-logo.png)
 
-### About
+# About
 Recommender system engine on NodeJS.
 
 Uses PostgreSQL database as storage of users, items and ratings.
@@ -25,8 +25,8 @@ There is also option to store them in files (if RAM is low or data is too big to
 Persistent storage of user/item factors - files.
 
 
-### Usage
-# Test on MovieLens data:
+# Usage
+### Test on MovieLens data:
 Create PostgreSQL db, import schema from `data/db-schema.sql`
 Set options in `config/config-*.js`
 ```bash
@@ -38,7 +38,7 @@ Open in browser `http://localhost:8004/train`
 See progress at stdout
 After train complete - open in browser `http://localhost:8004/userid/<uid>/recommend`
 
-# Test on MyAnimeList data:
+### Test on MyAnimeList data:
 Create PostgreSQL db, import schema from `data/db-schema.sql`
 Set options in `config/config-*.js`
 See `malscan` project to import data
@@ -51,39 +51,39 @@ See progress at stdout
 To test recommendations open in browser `http://localhost:8004/user/<login in mal>/recommend`
 
 
-### Using clustering
+# Using clustering
 ...
 
 
-### Options
+# Options
 See `EmfBase.DefaultOptions`
 ...
 
 
 
-### Performance
+# Performance
 OS: Ubuntu 16.04 LTS, nodejs v6.9.2
 PC#1: Core i5-6500, 16GB DRR4-2133, SSD Samsung 850
 Laptop#1: Lenovo Z570 - Core i5-2450M, 8GB DDR2, HDD 5400rpm (connected as slave with Fast Ethernet)
 
-# MovieLens 1m @ PC#1
+### MovieLens 1m @ PC#1
 6840 users, 3883 items, 1M ratings
 100 factors, 10 iters, 85/10/5% split
 Prepare: 106s
 Times per iteration: 3.2s for users, 3.2s for items
 RMSE: 0.84, normalized = ?
 
-# MAL @ PC#1
+### MAL @ PC#1
 1.75M users with lists (2.13M without), 12.7K items, 121M ratings
 100 factors, 85/10/5% split
 Times per iteration: 630s for users, 720s for items, ? for rmse validate, ? for rmse test
 RMSE: ?, normalized = ?
 
-# MAL @ PC#1+Laptop#1
+### MAL @ PC#1+Laptop#1
 ...
 
 
-### Thoughts
+# Thoughts
 You can:
 - use matrix factorization as base algo
 - use item-to-item recommendations for items rated by user (todo)
