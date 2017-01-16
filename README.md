@@ -32,11 +32,11 @@ Persistent storage of user/item factors - files.
 - Import data (100k or 1m)
 ```bash
 npm install
-node index.js import_ml 1m
+dbType=ml node index.js import_ml 1m
 ```
 - Start
 ```bash
-node index.js start
+dbType=ml node index.js start
 ```
 - Open in browser `http://localhost:8004/train`
 - See progress at stdout
@@ -49,7 +49,7 @@ node index.js start
 - Start
 ```bash
 npm install
-node index.js start
+dbType=mal node index.js start
 ```
 - Open in browser `http://localhost:8004/train`
 - See progress at stdout
@@ -77,16 +77,16 @@ Hard:
 
 ### MovieLens 1m @ PC#1
 - 6840 users, 3883 items, 1M ratings
-- 100 factors, 10 iters, 85/10/5% split
+- 100 factors, 85/10/5% split
 - Times per iteration: 3.2s for users, 3.2s for items
-- RMSE: ~0.84 (and less after each iteration)
+- RMSE: ~0.842 (after 10 iters)
 
 ### MAL @ PC#1
 - 1.75M users with lists (2.13M without), 12.7K items, 121M ratings
 - 100 factors, 85/10/5% split
-- Prepare: first time (splitting all ratings to sets) too long - 1h:5m
+- Prepare: first time (splitting all ratings to sets) too long - 1h:5m (todo: how to optimize?)
 - Times per iteration: 630s for users, 720s for items, ? for rmse
-- RMSE: ?
+- RMSE: ? (after ? iters)
 
 ### MAL @ PC#1 + Laptop#1 (cluster)
 todo...

@@ -10,7 +10,9 @@ vectorious-plus
 quick-tcp-socket
 
 data/ml-*
-data/factors*
+data/ml_factors*
+data/mal_factors*
+data/*factors*
 data/db-schema-old*
 upd_schema.sh
 
