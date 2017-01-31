@@ -12,14 +12,14 @@ Made for MyAnimeList data scheme, but can be modified to use on any database wit
 
 Uses explicit matrix factorization algorithms: ALS (primary, multi-threaded) and SGD (single-threaded, obsolete).
 
-Matrix operations are accelerated by using C++ BLAS/LAPACK libraries binded to nodejs (see my forks of [nblas](https://www.npmjs.com/package/nblas-plus), [vectorious](https://www.npmjs.com/package/vectorious-plus)).
+Matrix operations are accelerated by using C++ BLAS/LAPACK libraries binded to nodejs (see my forks of [nblas](https://github.com/ukrbublik/nblas-plus), [vectorious](https://github.com/ukrbublik/vectorious-plus)).
 
 With ALS algorithm matrix factorization task is parallelized, runs in separate NodeJS worker processes. 
 (By default 1 worker because BLAS/LAPACK is multi-threaded itself and utilizes all CPU threads.) 
 
-Can be split to several PCs using simple implemented clustering with [IPC sockets](https://www.npmjs.com/package/quick-tcp-socket).
+Can be split to several PCs using simple implemented clustering with [IPC sockets](https://github.com/ukrbublik/quick-tcp-socket).
 
-During training user/item factors matricies data are stored in [shared memory](https://www.npmjs.com/package/shm-typed-array) to be accessible by worker processes.
+During training user/item factors matricies data are stored in [shared memory](https://github.com/ukrbublik/shm-typed-array) to be accessible by worker processes.
 
 There is also option to store them in files (if RAM is low or data is too big to fit in RAM). 
 
