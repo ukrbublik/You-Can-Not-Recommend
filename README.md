@@ -59,7 +59,7 @@ dbType=mal node index.js start
 
 # Using clustering
 
-### master
+### master node
 - Set options in `config/config-base.js`, `config/config-master.js`
   - `emf.clusterServerPort` (default: 7101) (port to listen in cluster)
 - Start
@@ -75,7 +75,7 @@ Connected to cluster node #s1
 Cluster is gathered: 1 slaves
 ```
 
-### slave
+### slave node
 - Set options in `config/config-base.js`, `config/config-slave.js`
   - `emf.clusterMasterPort` (default: 7101) (should be equal to master's `emf.clusterServerPort`)
   - `emf.clusterServerPort` (default: 7104) (port to listen in cluster)
@@ -90,9 +90,12 @@ API listening on port 8011
 Cluster node #m client connected
 ```
 
-- Open in browser `http://localhost:8004/gather` 
-  (not ncessary, will be automatically performed on train start)
-- Now can train
+### API
+- Open in browser `http://localhost:8004/gather` to let all nodes in cluster know each other (full-mesh).
+  This step is not necessary, will be automatically performed on train start.
+- Now can train as usual. 
+  See progress at stdout on master and slave nodes.
+  If some slave node will be disconnected, master will detect and handle it.
 
 
 # Options
