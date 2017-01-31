@@ -58,11 +58,47 @@ dbType=mal node index.js start
 
 
 # Using clustering
-todo...
+
+### master
+- Set options in `config/config-base.js`, `config/config-master.js`
+  - `emf.clusterServerPort` (default: 7101) (port to listen in cluster)
+- Start
+```bash
+$ dbType=mal configPrefix=master node index.js start
+Listening cluster on port 7101
+API listening on port 8004
+... after slave started
+Cluster node #s1 registered:  { port: 7104, host: 'localhost' }
+... after gather
+Let cluster slaves to connect with each other (full-mesh)...
+Connected to cluster node #s1
+Cluster is gathered: 1 slaves
+```
+
+### slave
+- Set options in `config/config-base.js`, `config/config-slave.js`
+  - `emf.clusterMasterPort` (default: 7101) (should be equal to master's `emf.clusterServerPort`)
+  - `emf.clusterServerPort` (default: 7104) (port to listen in cluster)
+- Start
+```bash
+$ dbType=mal configPrefix=slave node index.js start
+Listening cluster on port 7104
+Connected to Lord
+Lord registered me as #s1
+API listening on port 8011
+... after gather
+Cluster node #m client connected
+```
+
+- Open in browser `http://localhost:8004/gather` 
+  (not ncessary, will be automatically performed on train start)
+- Now can train
 
 
 # Options
 See `EmfBase.DefaultOptions`
+
+todo... describe here
 
 
 # Performance
@@ -77,7 +113,7 @@ Hard:
 - Laptop#1: Lenovo Z570 - Core i5-2450M, 8GB DDR2, HDD 5400rpm (connected as slave with Fast Ethernet)
 
 ### MovieLens 1m @ PC#1
-- 6840 users, 3883 items, 1M ratings
+- 6040 users, 3883 items, 1M ratings
 - 100 factors, 85/10/5% split
 - Times per iteration: 2x 3.2s for U/I factors
 - RMSE: ~0.842 (normalized 0.168) (after 10 iters)
@@ -86,8 +122,8 @@ Hard:
 - 1.75M users with lists (2.13M without), 12.7K items, 121M ratings
 - 100 factors, 85/10/5% split
 - Prepare: first time (splitting all ratings to sets) too long - 1h:5m (todo: how to optimize?)
-- Times per iteration: 2x 670s for U/I factors, 3x 25s for RMSE
-- RMSE: 1.346 (normalized 0.135) (after 2 iters)
+- Times per iteration: 2x 660s for U/I factors, 3x 25s for RMSE
+- RMSE: 1.17 (normalized 0.117) (after 3 iters)
 
 todo... do more iters
 
@@ -107,3 +143,4 @@ You can not:
 
 - include in recommendations items that user already plans to watch or watched but not rated
 - repeat items of same mediafranchise (todo)
+

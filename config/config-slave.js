@@ -2,9 +2,9 @@ var config = {};
 const deepmerge = require('deepmerge');
 
 config = deepmerge(require('./config-base'), {
-	"emf": {
+  "emf": {
     "clusterServerPort": 7104,
-	},
+  },
   "api": {
     "apiServerPort": 8011
   }

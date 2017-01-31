@@ -1,5 +1,5 @@
 var config = {
-	"db": {
+  "db": {
     "mal": {
       "host": "localhost",
       "port": 5432,
@@ -14,7 +14,7 @@ var config = {
       "user": "root",
       "password": "toor"
     }
-	},
+  },
   "redis": {
   },
   "common": {
@@ -28,15 +28,15 @@ var config = {
       "ml": 3.5, //of 5
     },
   },
-	"emf": {
+  "emf": {
     "factorsCount": 100,
     "trainIters": 10,
     "clusterMasterHost": "localhost",
     "clusterMasterPort": 7101,
     "clusterServerPort": 7101
-	},
+  },
   "api": {
-	  "apiServerPort": 8004
+    "apiServerPort": 8004
   }
 };
 
