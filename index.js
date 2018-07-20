@@ -51,7 +51,7 @@ function show_cmd_help() {
   console.log("import_ml: import from MovieLens data. Param 1: 100k|1m");
   console.log("delete_all_data: clear db, delete calc results. " 
     + "Useful after playing with ML data and switching to production data. " 
-    + "Be sure to use it!!!");
+    + "Be sure when using it!!!");
   console.log("start: start server");
   console.log("Increase memory of node: --max_old_space_size=<size_MB>");
   process.exit(0);

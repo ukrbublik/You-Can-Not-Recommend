@@ -3,6 +3,7 @@ coverage
 npm-debug.log
 build
 node_modules
+package-lock.json
 
 nblas-plus
 shm-typed-array
